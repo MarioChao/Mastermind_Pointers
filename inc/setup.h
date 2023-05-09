@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <limits>
+#include <cassert>
 using namespace std;
 
 void setup(int **, int *);
