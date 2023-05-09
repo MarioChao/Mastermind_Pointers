@@ -2,9 +2,12 @@
 
 bool compareGuess(int *, int *, int, string *);
 
-/// @brief Simulates the gameplay of guessing an array of numbers.
-/// @param code The array representing the code.
-/// @param codeSize The size of the array.
+/**
+ * @brief Simulates the gameplay of guessing an array of numbers.
+ * 
+ * @param code The array representing the code.
+ * @param codeSize The size of the array.
+ */
 void playGame(int *code, int codeSize) {
     // Variable to store guess
     int *userGuess = new int[codeSize]();
@@ -23,22 +26,13 @@ void playGame(int *code, int codeSize) {
             cout << feedback << '\n';
         }
         // Input guess
-        /*for (int i = 0; i < codeSize; i++) {
-            cout << "Enter number " << i << ": >";
-            cin >> *(userGuess + i);
-            if (!cin) {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                i--;
-                continue;
-            }
-        }*/
         string inp;
         cout << "Enter your guess of " << codeSize << " numbers:\n";
         while (true) {
             // Input guess from lines
             cout << ">";
-            if (!getline(cin >> ws, inp)) {
+            if (!getline(cin >> ws, inp)) { // Skips leading whitespaces
+                /* getline fails */
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 continue;
@@ -48,16 +42,12 @@ void playGame(int *code, int codeSize) {
                 int startPos = 0;
                 size_t delimPos;
                 for (int i = 0; i < codeSize; i++) {
+                    // Find the first non-whitespace
+                    startPos = inp.find_first_not_of(" \t\r\n", startPos);
                     // Find the next whitespace
                     delimPos = inp.find_first_of(" \t\r\n", startPos);
                     if (delimPos == string::npos) {
                         delimPos = (int) inp.length();
-                    }
-                    // Iterate again if the first character is whitespace
-                    if (startPos == delimPos) {
-                        startPos = delimPos + 1;
-                        i--;
-                        continue;
                     }
                     // Convert the substring to a number and store it in array
                     *(userGuess + i) = stoi(inp.substr(startPos, delimPos - startPos));
@@ -85,34 +75,41 @@ void playGame(int *code, int codeSize) {
     delete[] userGuess;
 }
 
-/// @brief Compare the code to the guess and prints out a feedback.
-/// @param code The array representing the code.
-/// @param guess The array representing the guess.
-/// @param codeSize The size of the arrays.
-/// @param feedback The string pointer that stores the current guess's feedback on a new line.
-/// @return Whether all of the numbers in the guess matches the code.
+/**
+ * @brief Compare the code to the guess and prints out a feedback.
+ * 
+ * @param code The array representing the code.
+ * @param guess The array representing the guess.
+ * @param codeSize The size of the arrays.
+ * @param feedback The string pointer that stores the current guess's feedback on a new line.
+ * @return true All numbers in the guess matches the code.
+ * @return false The guess doesn't fully match the code.
+ */
 bool compareGuess(int *code, int *guess, int codeSize, string *feedback) {
     bool *lookedCode = new bool[codeSize](); // Initialized to 0
     bool *lookedGuess = new bool[codeSize]();
-    // Get correct numbers in correct positions
+    // Get correct positions
     int correctNums = 0;
     for (int i = 0; i < codeSize; i++) {
-        // Code matches guess
+        /* Iterate over the code */
         if (code[i] == guess[i]) {
+            /* Code matches guess */
             lookedCode[i] = true;
             lookedGuess[i] = true;
             correctNums++;
         }
     }
-    // Get correct numbers in wrong positions, and extra numbers
+    // Get wrong positions and extra numbers
     int wrongPosNums = 0;
     int extraNums = 0;
     for (int guessI = 0; guessI < codeSize; guessI++) {
-        // If unlooked guess
+        /* Look through the guess */
         if (!lookedGuess[guessI]) {
+            /* If unlooked guess */
             for (int codeI = 0; codeI < codeSize; codeI++) {
-                // If unlooked code matches unlooked guess
+                /* Look through the code */
                 if (!lookedCode[codeI] && code[codeI] == guess[guessI]) {
+                    /* If unlooked code matches unlooked guess */
                     lookedCode[codeI] = true;
                     lookedGuess[guessI] = true;
                     wrongPosNums++;
@@ -120,26 +117,23 @@ bool compareGuess(int *code, int *guess, int codeSize, string *feedback) {
                 }
             }
         }
-        // If unlooked guess doesn't match any unlooked code
         if (!lookedGuess[guessI]) {
+            /* If unlooked guess doesn't match any unlooked code */
             extraNums++;
         }
     }
     // Print feedback
     cout << "-- Guess Feedback --\n";
-    // cout << "Correct positions: " << correctNums << '\n';
-    // cout << "Numbers in wrong positions: " << wrongPosNums << '\n';
-    // cout << "Extra numbers (including wrong numbers): " << extraNums << '\n';
-    cout << "C: " << correctNums << '\n';
-    cout << "W: " << wrongPosNums << '\n';
-    cout << "E: " << extraNums << '\n';
+    cout << "C: " << correctNums << '\n'; // Correct positions
+    cout << "W: " << wrongPosNums << '\n'; // Wrong positions
+    cout << "E: " << extraNums << '\n'; // Extra or wrong numbers
     // Store feedback
     string tmpFeedback;
     if ((int) (*feedback).length() > 0) tmpFeedback = '\n';
-    for (int i = 0; i < codeSize; i++) tmpFeedback += to_string(guess[i]) + " ";
-    tmpFeedback += string("| ") + "C:" + to_string(correctNums);
-    tmpFeedback += " W:" + to_string(wrongPosNums);
-    tmpFeedback += " E:" + to_string(extraNums);
+    for (int i = 0; i < codeSize; i++) tmpFeedback += to_string(guess[i]) + " "; // The guess
+    tmpFeedback += string("| ") + "C:" + to_string(correctNums); // Correct positions
+    tmpFeedback += " W:" + to_string(wrongPosNums); // Wrong positions
+    tmpFeedback += " E:" + to_string(extraNums); // Extra or wrong numbers
     *feedback += tmpFeedback;
     // Delete
     delete[] lookedCode;

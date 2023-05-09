@@ -28,7 +28,7 @@ void runProgram() {
     // Setup
     int *flag, flagSize;
     setup(&flag, &flagSize);
-    // Debug
+    // Debug (print the code)
     if (isDebug) {
         for (int i = 0; i < flagSize; i++) {
             cout << *(flag + i) << ' ';
