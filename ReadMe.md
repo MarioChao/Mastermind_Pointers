@@ -9,7 +9,7 @@ Run it on replit here:<br>
 How to play
 =======
 
-To setup for the game:
+To set up for the game:
 -------
 
 * First, you will need to enter a "difficulty level", alternately known as "game level":
