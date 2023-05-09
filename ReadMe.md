@@ -3,6 +3,9 @@ Synopsis
 
 This program lets you play the code-breaking game known as *[Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game))*.
 
+Run it on replit here:<br>
+[![Run on Repl.it](https://replit.com/badge/github/MarioChao/Mastermind_Pointers)](https://replit.com/new/github/MarioChao/Mastermind_Pointers)
+
 How to play
 =======
 
@@ -24,6 +27,16 @@ To play the game:
 * After making a guess, press enter, and the game will automatically provide a feedback and move on to the next round.
     If the player has correctly guessed all of the numbers in the correct positions, the game will end immediately.
 * The feedback contains three numbers:
+
+| Type          | Meaning                       |
+| :-----------: | ----------------------------- |
+| C             | numbers in correct positions  |
+| W             | numbers in wrong positions    |
+| E             | extra or wrong numbers        |
+
+<details>
+    <summary><strong>-= Explanation =-</strong></summary>
+
     > "C" (numbers in correct positions):<br>
     > This denotes how many numbers in your guess are in the correct position in the list.
     >
@@ -33,6 +46,7 @@ To play the game:
     >
     > "E" (extra or wrong numbers):<br>
     > This denoates the number of extra or wrong numbers in your guess. This represents the remaining numbers in the guess after excluding the "C" and "W"s.
+</details>
 
 More about the program
 =======

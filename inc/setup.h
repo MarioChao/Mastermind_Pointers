@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <ctime>
+#include <limits>
 using namespace std;
 
 void setup(int **, int *);
