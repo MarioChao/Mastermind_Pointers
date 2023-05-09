@@ -39,19 +39,17 @@ To play the game:
 
 > "C" (numbers in correct positions):
 >
->> This denotes how many numbers in your guess are in the correct position in the list.
->
+> This denotes how many numbers in your guess are in the correct position in the list.
+
 > "W" (numbers in wrong positions):
 >
->> This denotes how many numbers in your guess exist in the list, but are not in the correct position.
->>
->> **Notice:** For duplicates, the extra amount of numbers will be instead counted in "E" as extra. For example, if the list is "1 3 3 7" and you guessed "1 1 1 1", "C" will be 1, "W" will be 0, and "E" will be 3 (the three 1s at 2nd, 3rd, and 4th position are extra).
+> This denotes how many numbers in your guess exist in the list, but are not in the correct position.
 >
+> **Notice:** For duplicates, the extra amount of numbers will be instead counted in "E" as extra. For example, if the list is "1 3 3 7" and you guessed "1 1 1 1", "C" will be 1, "W" will be 0, and "E" will be 3 (the three 1s at 2nd, 3rd, and 4th position are extra).
+
 > "E" (extra or wrong numbers):
 >
->> This denoates the number of extra or wrong numbers in your guess. This represents the remaining numbers in the guess after excluding the "C" and "W"s.
->
-> <br>
+> This denoates the number of extra or wrong numbers in your guess. This represents the remaining numbers in the guess after excluding the "C" and "W"s.
 
 </details>
 
